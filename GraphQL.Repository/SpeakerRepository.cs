@@ -28,7 +28,7 @@ namespace GraphQL.Repository
         public async Task<IEnumerable<Speaker>> GetAllSpeakerAsync(bool AsTraking = false)
         {
             return await FindAll(AsTraking).ToListAsync();
-         }
+        }
 
     }
 }
