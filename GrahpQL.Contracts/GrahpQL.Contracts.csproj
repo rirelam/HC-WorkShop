@@ -2,6 +2,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\GraphQL.Entities\GraphQL.Entities.csproj" />
+    <ProjectReference Include="..\GraphQL.Shared\GraphQL.Shared.csproj" />
   </ItemGroup>
 
   <PropertyGroup>
