@@ -1,4 +1,5 @@
 using GrahpQL.Contracts;
+using GrahpQL.Presentation.Queries;
 using GraphQL.Repository;
 using GraphQL.Services;
 using GraphQL.Services.Contracts;
@@ -20,5 +21,10 @@ namespace GraphQL.Extensions
 
         public static void ConfigureServiceManager(this IServiceCollection services) =>
             services.AddScoped<IServiceManager, ServiceManager>();
+
+        public static void ConfigureGraphQL(this IServiceCollection services) =>
+           services
+              .AddGraphQLServer()
+              .AddQueryType<Query>();
     }
 }

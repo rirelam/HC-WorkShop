@@ -13,6 +13,7 @@
     </PackageReference>
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="7.0.0" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
+    <PackageReference Include="HotChocolate.AspNetCore" Version="12.15.2" />
   </ItemGroup>
 
   <ItemGroup>
@@ -21,6 +22,7 @@
     <ProjectReference Include="..\GraphQL.Services\GraphQL.Services.csproj" />
     <ProjectReference Include="..\GraphQL.Services.Contracts\GraphQL.Services.Contracts.csproj" />
     <ProjectReference Include="..\GrahpQL.Contracts\GrahpQL.Contracts.csproj" />
+    <ProjectReference Include="..\GrahpQL.Presentation\GrahpQL.Presentation.csproj" />
   </ItemGroup>
 
 </Project>
