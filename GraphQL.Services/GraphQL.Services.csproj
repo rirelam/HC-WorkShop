@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <ItemGroup>
+    <ProjectReference Include="..\GraphQL.Services.Contracts\GraphQL.Services.Contracts.csproj" />
+    <ProjectReference Include="..\GraphQL.Entities\GraphQL.Entities.csproj" />
+    <ProjectReference Include="..\GrahpQL.Contracts\GrahpQL.Contracts.csproj" />
+  </ItemGroup>
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+</Project>
