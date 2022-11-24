@@ -1,4 +1,5 @@
 using GrahpQL.Contracts;
+using GrahpQL.Presentation.Mutations;
 using GrahpQL.Presentation.Queries;
 using GraphQL.Repository;
 using GraphQL.Services;
@@ -25,6 +26,7 @@ namespace GraphQL.Extensions
         public static void ConfigureGraphQL(this IServiceCollection services) =>
            services
               .AddGraphQLServer()
-              .AddQueryType<Query>();
+              .AddQueryType<Query>()
+              .AddMutationType<Mutation>();
     }
 }

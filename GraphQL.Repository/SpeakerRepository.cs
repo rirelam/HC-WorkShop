@@ -14,7 +14,7 @@ namespace GraphQL.Repository
 
         }
 
-        public void AddSpeaker(AddSpeakerDto speakerDto)
+        public void AddSpeaker(AddSpeakerInputDto speakerDto)
         {
             var speaker = new Speaker
             {

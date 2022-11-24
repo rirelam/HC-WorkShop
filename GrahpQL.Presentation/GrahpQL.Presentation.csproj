@@ -11,9 +11,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\GraphQL.Services.Contracts\GraphQL.Services.Contracts.csproj" />
+    <ProjectReference Include="..\GraphQL.Services\GraphQL.Services.csproj" />
     <ProjectReference Include="..\GraphQL.Entities\GraphQL.Entities.csproj" />
   </ItemGroup>
+
 
 
 </Project>
