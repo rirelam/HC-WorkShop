@@ -1,5 +1,6 @@
 
 using GrahpQL.Contracts;
+using Microsoft.EntityFrameworkCore;
 
 namespace GraphQL.Repository
 {
@@ -8,9 +9,9 @@ namespace GraphQL.Repository
         private readonly ApplicationDbContext _repositoryContext;
         private readonly Lazy<ISpeakerRepository> _speakerRepository;
 
-        public RepositoryManager(ApplicationDbContext repositoryContext)
+        public RepositoryManager(IDbContextFactory<ApplicationDbContext> repositoryContext)
         {
-            _repositoryContext = repositoryContext;
+            _repositoryContext = repositoryContext.CreateDbContext();
             _speakerRepository = new Lazy<ISpeakerRepository>(() => new SpeakerRepository(repositoryContext));
         }
 

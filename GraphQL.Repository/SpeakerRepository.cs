@@ -8,8 +8,8 @@ namespace GraphQL.Repository
 {
     public class SpeakerRepository : RepositoryBase<Speaker>, ISpeakerRepository
     {
-        public SpeakerRepository(ApplicationDbContext repositoryContext)
-         : base(repositoryContext)
+        public SpeakerRepository(IDbContextFactory<ApplicationDbContext> repositoryContext)
+         : base(repositoryContext.CreateDbContext())
         {
 
         }

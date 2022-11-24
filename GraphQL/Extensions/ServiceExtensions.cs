@@ -13,15 +13,15 @@ namespace GraphQL.Extensions
     {
         public static void ConfigureDbContextService(this IServiceCollection services, IConfiguration configuration)
         {
-            services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(configuration.GetConnectionString(ConfigurationConstants.WORKSHOP_CONTEXT),
+            services.AddPooledDbContextFactory<ApplicationDbContext>(options => options.UseSqlServer(configuration.GetConnectionString(ConfigurationConstants.WORKSHOP_CONTEXT),
                 b => b.MigrationsAssembly("GraphQL")));
         }
 
         public static void ConfigureRepositoryManager(this IServiceCollection services) =>
-        services.AddScoped<IRepositoryManager, RepositoryManager>();
+        services.AddTransient<IRepositoryManager, RepositoryManager>();
 
         public static void ConfigureServiceManager(this IServiceCollection services) =>
-            services.AddScoped<IServiceManager, ServiceManager>();
+            services.AddTransient<IServiceManager, ServiceManager>();
 
         public static void ConfigureGraphQL(this IServiceCollection services) =>
            services

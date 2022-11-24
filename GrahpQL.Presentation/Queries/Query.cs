@@ -1,5 +1,3 @@
-
-using System.IO.Pipes;
 using GraphQL.Entities;
 using GraphQL.Services.Contracts;
 
