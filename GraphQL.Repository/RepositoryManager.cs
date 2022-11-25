@@ -12,7 +12,7 @@ namespace GraphQL.Repository
         public RepositoryManager(IDbContextFactory<ApplicationDbContext> repositoryContext)
         {
             _repositoryContext = repositoryContext.CreateDbContext();
-            _speakerRepository = new Lazy<ISpeakerRepository>(() => new SpeakerRepository(repositoryContext));
+            _speakerRepository = new Lazy<ISpeakerRepository>(() => new SpeakerRepository(_repositoryContext));
         }
 
         public ISpeakerRepository Speaker => _speakerRepository.Value;
