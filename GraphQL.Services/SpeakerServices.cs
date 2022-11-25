@@ -23,7 +23,17 @@ namespace GraphQL.Services
 
         public async Task<IEnumerable<Speaker>> GetAllSpeakersAsync(bool trackChanges = false)
         {
-            return await _repository.Speaker.GetAllSpeakerAsync();
+            return await _repository.Speaker.GetAllSpeakersAsync();
+        }
+
+        public async Task<ICollection<int>> GetSessionsIdsAsync(Speaker speaker, CancellationToken cancellationToken)
+        {
+            return await _repository.Speaker.GetSessionsIdsAsync(speaker.Id, cancellationToken);
+        }
+
+        public async Task<IReadOnlyDictionary<int, Speaker>> GetSpeakersDictionaryAsync(IReadOnlyList<int> keys, CancellationToken cancellationToken)
+        {
+            return await _repository.Speaker.GetSpeakersDictionaryAsync(keys, cancellationToken);
         }
     }
 }

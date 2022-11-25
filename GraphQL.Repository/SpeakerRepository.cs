@@ -1,4 +1,5 @@
 
+using System.Reflection.Metadata.Ecma335;
 using GrahpQL.Contracts;
 using GraphQL.Entities;
 using GraphQL.Shared.DTO;
@@ -8,7 +9,6 @@ namespace GraphQL.Repository
 {
     public class SpeakerRepository : RepositoryBase<Speaker>, ISpeakerRepository
     {
-        // public SpeakerRepository(IDbContextFactory<ApplicationDbContext> repositoryContext)
         public SpeakerRepository(ApplicationDbContext repositoryContext)
          : base(repositoryContext)
         {
@@ -26,10 +26,27 @@ namespace GraphQL.Repository
             Create(speaker);
         }
 
-        public async Task<IEnumerable<Speaker>> GetAllSpeakerAsync(bool AsTraking = false)
+        public async Task<IEnumerable<Speaker>> GetAllSpeakersAsync(bool AsTraking = false)
         {
             return await FindAll(AsTraking).ToListAsync();
         }
 
+        public async Task<ICollection<int>> GetSessionsIdsAsync(int speakerId, CancellationToken cancellationToken)
+        {
+            return await RepositoryContext.Speakers
+                    .Where(s => s.Id == speakerId)
+                    .Include(s => s.SessionSpeakers)
+                    .SelectMany(s => s.SessionSpeakers.Select(t => t.SessionId))
+                    .ToArrayAsync(cancellationToken);
+
+        }           
+
+        public async Task<IReadOnlyDictionary<int, Speaker>> GetSpeakersDictionaryAsync(IReadOnlyList<int> keys, CancellationToken cancellationToken)
+        {
+            return await RepositoryContext.Speakers
+                        .Where(sp => keys.Contains(sp.Id))
+                        .ToDictionaryAsync(t => t.Id, cancellationToken);
+        }
+        
     }
 }

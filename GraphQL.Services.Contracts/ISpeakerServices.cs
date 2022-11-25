@@ -8,5 +8,8 @@ namespace GraphQL.Services.Contracts
     {
         Task<IEnumerable<Speaker>> GetAllSpeakersAsync(bool trackChanges = false);
         Task AddSpeaker(AddSpeakerInputDto speakerInput);
+        Task<IReadOnlyDictionary<int, Speaker>> GetSpeakersDictionaryAsync(IReadOnlyList<int> keys, CancellationToken cancellationToken);
+        Task<ICollection<int>> GetSessionsIdsAsync(Speaker speaker, CancellationToken cancellationToken);
+
     }
 }

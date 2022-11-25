@@ -4,11 +4,12 @@ using GraphQL.Services.Contracts;
 
 namespace GrahpQL.Presentation.DataLoader
 {
-    public class SpeakerByIdDataLoader : BatchDataLoader<int, Speaker>
+    public class SessionByIdDataLoader : BatchDataLoader<int, Session>
     {
         private readonly IServiceManager _service;
 
-        public SpeakerByIdDataLoader(
+
+        public SessionByIdDataLoader(
             IBatchScheduler batchScheduler,
             IServiceManager service)
             : base(batchScheduler)
@@ -17,11 +18,11 @@ namespace GrahpQL.Presentation.DataLoader
                 throw new ArgumentNullException(nameof(service));
         }
 
-        protected override async Task<IReadOnlyDictionary<int, Speaker>> LoadBatchAsync(
+        protected override async Task<IReadOnlyDictionary<int, Session>> LoadBatchAsync(
             IReadOnlyList<int> keys,
             CancellationToken cancellationToken)
         {
-            return await _service.SpeakerServices.GetSpeakersDictionaryAsync(keys, cancellationToken);
+            return await _service.SessionServices.GetSessionDictionaryAsync(keys, cancellationToken);
         }
     }
 }
