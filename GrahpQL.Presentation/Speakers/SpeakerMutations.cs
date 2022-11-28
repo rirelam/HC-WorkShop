@@ -1,11 +1,11 @@
-
-using GrahpQL.Presentation.Speakers;
+using GraphQL.Entities;
 using GraphQL.Services.Contracts;
 using GraphQL.Shared.DTO;
 
-namespace GrahpQL.Presentation.Mutations
+namespace GrahpQL.Presentation.Speakers
 {
-    public class Mutation
+    [ExtendObjectType("Mutation")]
+    public class SpeakerMutations
     {
         public async Task<AddSpeakerPayload> AddSpeakerAsync(
             AddSpeakerInput input,
@@ -20,8 +20,8 @@ namespace GrahpQL.Presentation.Mutations
 
             await service.SpeakerServices.AddSpeaker(speaker);
 
-
-            return new AddSpeakerPayload(new AddSpeakerOutputDto { Name = input.Name, Bio = input.Bio, Website = input.WebSite });
+            // TODO: cambiar para uso de automapper
+            return new AddSpeakerPayload(new Speaker { Name = input.Name, Bio = input.Bio, WebSite = input.WebSite });
         }
 
     }

@@ -1,14 +1,19 @@
-using GraphQL.Shared.DTO;
+
+using GrahpQL.Presentation.Shared;
+using GraphQL.Entities;
 
 namespace GrahpQL.Presentation.Speakers
-{
-    public class AddSpeakerPayload
+{  // TODO: Cambiar el Speaker por un Dto
+    public class AddSpeakerPayload : SpeakerPayloadBase
     {
-        public AddSpeakerPayload(AddSpeakerOutputDto speaker)
+        public AddSpeakerPayload(Speaker speaker)
+                    : base(speaker)
         {
-            Speaker = speaker;
         }
 
-        public AddSpeakerOutputDto Speaker { get; init; }
+        public AddSpeakerPayload(IReadOnlyList<UserError> errors)
+            : base(errors)
+        {
+        }
     }
 }

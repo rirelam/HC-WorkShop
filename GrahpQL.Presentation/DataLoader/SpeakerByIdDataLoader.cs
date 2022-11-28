@@ -7,7 +7,7 @@ namespace GrahpQL.Presentation.DataLoader
     public class SpeakerByIdDataLoader : BatchDataLoader<int, Speaker>
     {
         private readonly IServiceManager _service;
-
+        
         public SpeakerByIdDataLoader(
             IBatchScheduler batchScheduler,
             IServiceManager service)
@@ -21,7 +21,9 @@ namespace GrahpQL.Presentation.DataLoader
             IReadOnlyList<int> keys,
             CancellationToken cancellationToken)
         {
-            return await _service.SpeakerServices.GetSpeakersDictionaryAsync(keys, cancellationToken);
+            var speakers = await _service.SpeakerServices.GetSpeakerbyIdsAsync(keys);
+
+            return speakers.ToDictionary(s => s.Id);
         }
     }
 }

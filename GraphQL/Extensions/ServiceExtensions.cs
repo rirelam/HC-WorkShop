@@ -1,7 +1,7 @@
 using GrahpQL.Contracts;
 using GrahpQL.Presentation.DataLoader;
-using GrahpQL.Presentation.Mutations;
 using GrahpQL.Presentation.Queries;
+using GrahpQL.Presentation.Speakers;
 using GrahpQL.Presentation.Types;
 using GraphQL.Repository;
 using GraphQL.Services;
@@ -29,8 +29,10 @@ namespace GraphQL.Extensions
            services
               .AddGraphQLServer()
               .AddQueryType<Query>()
-              .AddMutationType<Mutation>()
+              .AddMutationType(d => d.Name("Mutation"))
+                .AddTypeExtension<SpeakerMutations>()
               .AddType<SpeakerType>()
+              .AddGlobalObjectIdentification()
               .AddDataLoader<SpeakerByIdDataLoader>()
               .AddDataLoader<SessionByIdDataLoader>();
     }

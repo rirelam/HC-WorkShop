@@ -14,6 +14,11 @@ namespace GraphQL.Services
             _repository = repository;
         }
 
+        public async Task<IEnumerable<Session>> GetSessionByIdsAsync(IReadOnlyList<int> keys)
+        {
+            return await _repository.Session.GetSessionByIdsAsync(keys);
+        }
+
         public async Task<IReadOnlyDictionary<int, Session>> GetSessionDictionaryAsync(IReadOnlyList<int> keys, CancellationToken cancellationToken)
         {
             return await _repository.Session.GetSessionDictionaryAsync(keys, cancellationToken);

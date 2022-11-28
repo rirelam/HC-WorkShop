@@ -10,6 +10,17 @@ namespace GrahpQL.Presentation.Types
         protected override void Configure(IObjectTypeDescriptor<Speaker> descriptor)
         {
             descriptor
+                .ImplementsNode()
+                .IdField(t => t.Id)
+                .ResolveNode(async (context, id) =>
+                            {
+                                Speaker speaker =
+                                    await context.DataLoader<SpeakerByIdDataLoader>().LoadAsync(id, context.RequestAborted);
+
+                                return speaker;
+                            });
+
+            descriptor
                 .Field(t => t.SessionSpeakers)
                 .ResolveWith<SpeakerResolvers>(t => t.GetSessionsAsync(default!, default!, default!, default))
                 .Name("sessions");

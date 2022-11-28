@@ -31,6 +31,11 @@ namespace GraphQL.Services
             return await _repository.Speaker.GetSessionsIdsAsync(speaker.Id, cancellationToken);
         }
 
+        public async Task<IEnumerable<Speaker>> GetSpeakerbyIdsAsync(IReadOnlyList<int> keys)
+        {
+            return await _repository.Speaker.GetSpeakerbyIdsAsync(keys);
+        }
+
         public async Task<IReadOnlyDictionary<int, Speaker>> GetSpeakersDictionaryAsync(IReadOnlyList<int> keys, CancellationToken cancellationToken)
         {
             return await _repository.Speaker.GetSpeakersDictionaryAsync(keys, cancellationToken);

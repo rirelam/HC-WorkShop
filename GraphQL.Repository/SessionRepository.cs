@@ -13,6 +13,13 @@ namespace GraphQL.Repository
 
         }
 
+        public async Task<IEnumerable<Session>> GetSessionByIdsAsync(IReadOnlyList<int> keys)
+        {
+            return await FindAll()
+                         .Where(s => keys.Contains(s.Id))
+                         .ToListAsync();
+        }
+
         public async Task<IReadOnlyDictionary<int, Session>> GetSessionDictionaryAsync(IReadOnlyList<int> keys, CancellationToken cancellationToken)
         {
             if (keys == null)

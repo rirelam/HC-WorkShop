@@ -1,7 +1,7 @@
 
 namespace GrahpQL.Contracts
 {
-    public interface IRepositoryManager
+    public interface IRepositoryManager : IAsyncDisposable
     {
         ISpeakerRepository Speaker { get; }
         ISessionRepository Session { get; }

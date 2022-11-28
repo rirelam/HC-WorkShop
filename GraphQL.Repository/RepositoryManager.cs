@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace GraphQL.Repository
 {
-    public class RepositoryManager : IRepositoryManager
+    public class RepositoryManager : IRepositoryManager, IAsyncDisposable
     {
         private readonly ApplicationDbContext _repositoryContext;
         private readonly Lazy<ISpeakerRepository> _speakerRepository;
@@ -21,5 +21,16 @@ namespace GraphQL.Repository
         public ISessionRepository Session => _sessionRepository.Value;
 
         public async Task SaveAsync() => await _repositoryContext.SaveChangesAsync();
+
+        public async ValueTask DisposeAsync()
+        {
+            if (_repositoryContext == null)
+            {
+                return;
+            }
+
+            await _repositoryContext.DisposeAsync();
+            GC.SuppressFinalize(this);
+        }
     }
 }

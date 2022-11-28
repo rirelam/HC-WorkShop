@@ -39,7 +39,14 @@ namespace GraphQL.Repository
                     .SelectMany(s => s.SessionSpeakers.Select(t => t.SessionId))
                     .ToArrayAsync(cancellationToken);
 
-        }           
+        }
+
+        public async Task<IEnumerable<Speaker>> GetSpeakerbyIdsAsync(IReadOnlyList<int> keys)
+        {
+            return await FindAll()
+                            .Where(s => keys.Contains(s.Id))
+                            .ToListAsync();
+        }
 
         public async Task<IReadOnlyDictionary<int, Speaker>> GetSpeakersDictionaryAsync(IReadOnlyList<int> keys, CancellationToken cancellationToken)
         {

@@ -22,7 +22,8 @@ namespace GrahpQL.Presentation.DataLoader
             IReadOnlyList<int> keys,
             CancellationToken cancellationToken)
         {
-            return await _service.SessionServices.GetSessionDictionaryAsync(keys, cancellationToken);
+            var sessions = await _service.SessionServices.GetSessionByIdsAsync(keys);
+            return sessions.ToDictionary(s => s.Id);
         }
     }
 }

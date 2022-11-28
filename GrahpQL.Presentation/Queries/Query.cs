@@ -11,10 +11,10 @@ namespace GrahpQL.Presentation.Queries
             return await service.SpeakerServices.GetAllSpeakersAsync();
         }
 
-        public Task<Speaker> GetSpeakerAsync(
-            int id,
+        public async Task<Speaker> GetSpeakerAsync(
+            [ID(nameof(Speaker))] int id,
             SpeakerByIdDataLoader dataLoader,
             CancellationToken cancellationToken) =>
-            dataLoader.LoadAsync(id, cancellationToken);
+            await dataLoader.LoadAsync(id, cancellationToken);
     }
-}
+} 
