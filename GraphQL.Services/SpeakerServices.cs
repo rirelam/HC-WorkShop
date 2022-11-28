@@ -40,5 +40,10 @@ namespace GraphQL.Services
         {
             return await _repository.Speaker.GetSpeakersDictionaryAsync(keys, cancellationToken);
         }
+
+        public async  Task<ICollection<int>> GetSpeakerSessionsAsync(int speakerId, CancellationToken cancellationToken)
+        {
+            return await _repository.Speaker.GetSpeakerSessionsAsync(speakerId, cancellationToken);
+        }
     }
 }

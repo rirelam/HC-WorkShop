@@ -34,7 +34,7 @@ namespace GrahpQL.Presentation.Types
                 SessionByIdDataLoader sessionById,
                 CancellationToken cancellationToken)
             {
-                IReadOnlyList<int> sessionIds = (IReadOnlyList<int>)await service.SpeakerServices.GetSessionsIdsAsync(speaker, cancellationToken);
+                IReadOnlyList<int> sessionIds = (IReadOnlyList<int>)await service.SpeakerServices.GetSpeakerSessionsAsync(speaker.Id, cancellationToken);
 
                 return await sessionById.LoadAsync(sessionIds, cancellationToken);
             }
