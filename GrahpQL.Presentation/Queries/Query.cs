@@ -10,10 +10,20 @@ namespace GrahpQL.Presentation.Queries
         {
             return await service.SpeakerServices.GetAllSpeakersAsync();
         }
+        public async Task<IEnumerable<Session>> GetSessions([Service] IServiceManager service)
+        {
+            return await service.SessionServices.GetAllSessionsAsync();
+        }
 
         public async Task<Speaker> GetSpeakerAsync(
-            [ID(nameof(Speaker))] int id,
+            int id,
             SpeakerByIdDataLoader dataLoader,
+            CancellationToken cancellationToken) =>
+            await dataLoader.LoadAsync(id, cancellationToken);
+            
+        public async Task<Session> GetSessionAsync(
+            int id,
+            SessionByIdDataLoader dataLoader,
             CancellationToken cancellationToken) =>
             await dataLoader.LoadAsync(id, cancellationToken);
     }

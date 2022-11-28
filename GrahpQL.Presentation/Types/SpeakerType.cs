@@ -1,7 +1,6 @@
 using GrahpQL.Presentation.DataLoader;
 using GraphQL.Entities;
 using GraphQL.Services.Contracts;
-using Microsoft.AspNetCore.Authorization;
 
 namespace GrahpQL.Presentation.Types
 {
@@ -9,16 +8,16 @@ namespace GrahpQL.Presentation.Types
     {
         protected override void Configure(IObjectTypeDescriptor<Speaker> descriptor)
         {
-            descriptor
-                .ImplementsNode()
-                .IdField(t => t.Id)
-                .ResolveNode(async (context, id) =>
-                            {
-                                Speaker speaker =
-                                    await context.DataLoader<SpeakerByIdDataLoader>().LoadAsync(id, context.RequestAborted);
+            // descriptor
+                // .ImplementsNode()
+                // .IdField(t => t.Id)
+                // .ResolveNode(async (context, id) =>
+                //             {
+                //                 Speaker speaker =
+                //                     await context.DataLoader<SpeakerByIdDataLoader>().LoadAsync(id, context.RequestAborted);
 
-                                return speaker;
-                            });
+                //                 return speaker;
+                //             });
 
             descriptor
                 .Field(t => t.SessionSpeakers)

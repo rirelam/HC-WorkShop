@@ -13,6 +13,11 @@ namespace GraphQL.Repository
 
         }
 
+        public async Task<IEnumerable<Session>> GetAllSessionsAsync(bool AsTraking = false)
+        {
+            return await FindAll(AsTraking).ToListAsync();
+        }
+
         public async Task<IEnumerable<Session>> GetSessionByIdsAsync(IReadOnlyList<int> keys)
         {
             return await FindAll()
@@ -20,15 +25,5 @@ namespace GraphQL.Repository
                          .ToListAsync();
         }
 
-        public async Task<IReadOnlyDictionary<int, Session>> GetSessionDictionaryAsync(IReadOnlyList<int> keys, CancellationToken cancellationToken)
-        {
-            if (keys == null)
-            {
-                return await RepositoryContext.Sessions.Where(sp=> 1==2).ToDictionaryAsync(t => t.Id, cancellationToken);
-            }
-            return await RepositoryContext.Sessions
-                        .Where(sp => keys.Contains(sp.Id))
-                        .ToDictionaryAsync(t => t.Id, cancellationToken);
-        }
     }
 }

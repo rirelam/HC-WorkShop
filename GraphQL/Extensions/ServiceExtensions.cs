@@ -8,6 +8,7 @@ using GraphQL.Services;
 using GraphQL.Services.Contracts;
 using GraphQL.Shared.Constants;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 
 namespace GraphQL.Extensions
 {
@@ -20,10 +21,10 @@ namespace GraphQL.Extensions
         }
 
         public static void ConfigureRepositoryManager(this IServiceCollection services) =>
-        services.AddTransient<IRepositoryManager, RepositoryManager>();
+        services.TryAddTransient<IRepositoryManager, RepositoryManager>();
 
         public static void ConfigureServiceManager(this IServiceCollection services) =>
-            services.AddTransient<IServiceManager, ServiceManager>();
+            services.TryAddTransient<IServiceManager, ServiceManager>();
 
         public static void ConfigureGraphQL(this IServiceCollection services) =>
            services
@@ -32,7 +33,6 @@ namespace GraphQL.Extensions
               .AddMutationType(d => d.Name("Mutation"))
                 .AddTypeExtension<SpeakerMutations>()
               .AddType<SpeakerType>()
-              .AddGlobalObjectIdentification()
               .AddDataLoader<SpeakerByIdDataLoader>()
               .AddDataLoader<SessionByIdDataLoader>();
     }
