@@ -4,6 +4,11 @@
     <ProjectReference Include="..\GraphQL.Services.Contracts\GraphQL.Services.Contracts.csproj" />
     <ProjectReference Include="..\GraphQL.Entities\GraphQL.Entities.csproj" />
     <ProjectReference Include="..\GrahpQL.Contracts\GrahpQL.Contracts.csproj" />
+    <ProjectReference Include="..\GraphQL.Repository\GraphQL.Repository.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.0" />
   </ItemGroup>
 
   <PropertyGroup>

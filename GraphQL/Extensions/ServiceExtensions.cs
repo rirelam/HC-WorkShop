@@ -29,7 +29,11 @@ namespace GraphQL.Extensions
         public static void ConfigureGraphQL(this IServiceCollection services) =>
            services
               .AddGraphQLServer()
+              .RegisterService<IServiceManager>(ServiceKind.Synchronized)
+              .RegisterService<IRepositoryManager>(ServiceKind.Synchronized)
+              .RegisterDbContext<ApplicationDbContext>(DbContextKind.Pooled)
               .AddQueryType<Query>()
+              .AddGlobalObjectIdentification()
               .AddMutationType(d => d.Name("Mutation"))
                 .AddTypeExtension<SpeakerMutations>()
               .AddType<SpeakerType>()
