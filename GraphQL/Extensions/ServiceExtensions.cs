@@ -1,3 +1,5 @@
+using Commons.Contract;
+using Commons.Services;
 using GrahpQL.Contracts;
 using GrahpQL.Presentation.DataLoader;
 using GrahpQL.Presentation.Queries;
@@ -14,6 +16,8 @@ namespace GraphQL.Extensions
 {
     public static class ServiceExtensions
     {
+        public static void ConfigureLoggerService(this IServiceCollection services) =>
+                        services.AddSingleton<ILoggerManager, LoggerManager>();
         public static void ConfigureDbContextService(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddPooledDbContextFactory<ApplicationDbContext>(options => options.UseSqlServer(configuration.GetConnectionString(ConfigurationConstants.WORKSHOP_CONTEXT),
