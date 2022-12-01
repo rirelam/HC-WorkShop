@@ -14,6 +14,12 @@ namespace GraphQL.Services
             _repository = repository;
         }
 
+        public async Task AddSession(Session session)
+        {
+            _repository.Session.AddSession(session);
+            await _repository.SaveAsync();
+        }
+
         public async Task<IEnumerable<Session>> GetAllSessionsAsync(bool trackChanges = false)
         {
             return await _repository.Session.GetAllSessionsAsync();

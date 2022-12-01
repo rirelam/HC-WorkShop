@@ -2,7 +2,7 @@ using Commons.Contract;
 using Commons.Services;
 using GrahpQL.Contracts;
 using GrahpQL.Presentation.DataLoader;
-using GrahpQL.Presentation.Queries;
+using GrahpQL.Presentation.Sessions;
 using GrahpQL.Presentation.Speakers;
 using GrahpQL.Presentation.Types;
 using GraphQL.Repository;
@@ -36,11 +36,16 @@ namespace GraphQL.Extensions
               .RegisterService<IServiceManager>(ServiceKind.Synchronized)
               .RegisterService<IRepositoryManager>(ServiceKind.Synchronized)
               .RegisterDbContext<ApplicationDbContext>(DbContextKind.Pooled)
-              .AddQueryType<Query>()
+              .AddQueryType(d => d.Name("Query"))
+                .AddTypeExtension<SpeakerQueries>()
               .AddGlobalObjectIdentification()
               .AddMutationType(d => d.Name("Mutation"))
                 .AddTypeExtension<SpeakerMutations>()
+                .AddTypeExtension<SessionMutations>()
               .AddType<SpeakerType>()
+              .AddType<SessionType>()
+              .AddType<AttendeeType>()
+              .AddType<TrackType>()
               .AddDataLoader<SpeakerByIdDataLoader>()
               .AddDataLoader<SessionByIdDataLoader>();
     }

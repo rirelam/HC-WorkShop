@@ -13,6 +13,8 @@ namespace GraphQL.Repository
 
         }
 
+        public void AddSession(Session session) => Create(session);
+
         public async Task<IEnumerable<Session>> GetAllSessionsAsync(bool AsTraking = false)
         {
             return await FindAll(AsTraking).ToListAsync();

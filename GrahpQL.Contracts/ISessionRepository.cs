@@ -6,6 +6,7 @@ namespace GrahpQL.Contracts
     public interface ISessionRepository
     {
         Task<IEnumerable<Session>> GetAllSessionsAsync(bool AsTraking = false);
+        void AddSession(Session session);
 
         Task<IEnumerable<Session>> GetSessionByIdsAsync(IReadOnlyList<int> keys);
         Task<ICollection<int>> GetSessionSpeakersAsync(int sessionId, CancellationToken cancellationToken);
