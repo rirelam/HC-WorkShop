@@ -5,6 +5,8 @@ namespace GrahpQL.Contracts
     {
         ISpeakerRepository Speaker { get; }
         ISessionRepository Session { get; }
+        IAttendeeRepository Attendee { get; }
+        ITrackRepository Track { get; }
 
         Task SaveAsync();
 

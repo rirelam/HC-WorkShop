@@ -5,6 +5,8 @@ namespace GraphQL.Services.Contracts
     {
         ISpeakerServices SpeakerServices { get; }
         ISessionServices SessionServices { get; }
+        IAttendeeServices AttendeeServices { get; }
+        ITrackServices TrackServices { get; }
 
     }
 }

@@ -11,6 +11,6 @@ namespace GrahpQL.Presentation.Shared
 
         public string Message { get; }
 
-        public string Code { get; } 
+        public string Code { get; }
     }
 }
