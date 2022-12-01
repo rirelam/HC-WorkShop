@@ -18,5 +18,10 @@ namespace GraphQL.Services
         {
             return await _repository.Track.GetTrackbyIdsAsync(keys);
         }
+
+        public async Task<ICollection<int>> GetTrackSessionsAsync(int trackId, CancellationToken cancellationToken)
+        {
+            return await _repository.Track.GetTrackSessionsAsync(trackId, cancellationToken);
+        }
     }
 }

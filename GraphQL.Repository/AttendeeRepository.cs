@@ -19,5 +19,14 @@ namespace GraphQL.Repository
                             .Where(s => keys.Contains(s.Id))
                             .ToListAsync();
         }
+
+        public async Task<ICollection<int>> GetAttendeeSessionsAsync(int attendeeId, CancellationToken cancellationToken)
+        {
+            return await RepositoryContext.Attendees
+                    .Where(s => s.Id == attendeeId)
+                    .Include(s => s.SessionsAttendees)
+                    .SelectMany(s => s.SessionsAttendees.Select(t => t.SessionId))
+                    .ToArrayAsync(cancellationToken);
+        }
     }
 }

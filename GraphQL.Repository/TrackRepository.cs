@@ -19,5 +19,13 @@ namespace GraphQL.Repository
                             .Where(s => keys.Contains(s.Id))
                             .ToListAsync();
         }
+
+        public async Task<ICollection<int>> GetTrackSessionsAsync(int trackId, CancellationToken cancellationToken)
+        {
+            return await RepositoryContext.Sessions
+                    .Where(s => s.TrackId == trackId)
+                    .Select(s => s.Id)
+                    .ToArrayAsync(cancellationToken);
+        }
     }
 }

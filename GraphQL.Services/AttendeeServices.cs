@@ -17,5 +17,10 @@ namespace GraphQL.Services
         {
             return await _repository.Attendee.GetAttendeebyIdsAsync(keys);
         }
+
+        public async Task<ICollection<int>> GetAttendeeSessionsAsync(int attendeeId, CancellationToken cancellationToken)
+        {
+            return await _repository.Attendee.GetAttendeeSessionsAsync(attendeeId, cancellationToken);
+        }
     }
 }
