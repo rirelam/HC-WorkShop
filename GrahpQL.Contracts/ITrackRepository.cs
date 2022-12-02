@@ -10,6 +10,8 @@ namespace GrahpQL.Contracts
         void Add(Track track);
         void UpdateTrack(Track track);
         Task<Track?> FindAsync(int trackId, CancellationToken cancellationToken);
-
+        Task<IEnumerable<Track>> GetTracksAsync(CancellationToken cancellationToken);
+        Task<Track?> GetTrackByNameAsync(string name, CancellationToken cancellationToken);
+        Task<IEnumerable<Track>?> GetTrackByNamesAsync(string[] names, CancellationToken cancellationToken);
     }
 }

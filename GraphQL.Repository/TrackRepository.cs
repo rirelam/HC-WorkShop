@@ -27,6 +27,21 @@ namespace GraphQL.Repository
                             .ToListAsync();
         }
 
+        public async Task<Track?> GetTrackByNameAsync(string name, CancellationToken cancellationToken)
+        {
+            return await RepositoryContext.Tracks.Where(t => t.Name == name).FirstOrDefaultAsync(cancellationToken);
+        }
+
+        public async Task<IEnumerable<Track>?> GetTrackByNamesAsync(string[] names, CancellationToken cancellationToken)
+        {
+            return await RepositoryContext.Tracks.Where(t => names.Contains(t.Name)).ToListAsync(cancellationToken);
+        }
+
+        public async Task<IEnumerable<Track>> GetTracksAsync(CancellationToken cancellationToken)
+        {
+            return await FindAll().ToListAsync(cancellationToken);
+        }
+
         public async Task<ICollection<int>> GetTrackSessionsAsync(int trackId, CancellationToken cancellationToken)
         {
             return await RepositoryContext.Sessions

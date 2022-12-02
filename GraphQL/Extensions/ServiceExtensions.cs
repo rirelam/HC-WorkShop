@@ -39,6 +39,8 @@ namespace GraphQL.Extensions
               .RegisterDbContext<ApplicationDbContext>(DbContextKind.Pooled)
               .AddQueryType(d => d.Name("Query"))
                 .AddTypeExtension<SpeakerQueries>()
+                .AddTypeExtension<SessionQueries>()
+                .AddTypeExtension<TrackQueries>()
               .AddGlobalObjectIdentification()
               .AddMutationType(d => d.Name("Mutation"))
                 .AddTypeExtension<SpeakerMutations>()

@@ -5,7 +5,7 @@ namespace GrahpQL.Contracts
 {
     public interface ISessionRepository
     {
-        Task<IEnumerable<Session>> GetAllSessionsAsync(bool AsTraking = false);
+        Task<IEnumerable<Session>> GetAllSessionsAsync(CancellationToken cancellationToken, bool AsTraking = false);
         void AddSession(Session session);
         void UpdateSession(Session session);
         IQueryable<Session> FindAsync(int sessionId);
