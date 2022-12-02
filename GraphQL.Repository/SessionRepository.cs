@@ -15,6 +15,11 @@ namespace GraphQL.Repository
 
         public void AddSession(Session session) => Create(session);
 
+        public IQueryable<Session> FindAsync(int sessionId)
+        {
+            return  FindByCondition(s => s.Id == sessionId);
+        }
+
         public async Task<IEnumerable<Session>> GetAllSessionsAsync(bool AsTraking = false)
         {
             return await FindAll(AsTraking).ToListAsync();
@@ -44,5 +49,7 @@ namespace GraphQL.Repository
                     .SelectMany(s => s.SessionSpeakers.Select(ss => ss.SpeakerId))
                     .ToArrayAsync(cancellationToken);
         }
+
+        public void UpdateSession(Session session) => Update(session);
     }
 }

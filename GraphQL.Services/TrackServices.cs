@@ -14,6 +14,17 @@ namespace GraphQL.Services
             _repository = repository;
         }
 
+        public async Task AddAsync(Track track)
+        {
+            _repository.Track.Add(track);
+            await _repository.SaveAsync();
+        }
+
+        public async Task<Track?> FindAsync(int trackId, CancellationToken cancellationToken)
+        {
+           return await _repository.Track.FindAsync(trackId, cancellationToken);
+        }
+
         public async Task<IEnumerable<Track>> GetTrackbyIdsAsync(IReadOnlyList<int> keys)
         {
             return await _repository.Track.GetTrackbyIdsAsync(keys);
@@ -22,6 +33,12 @@ namespace GraphQL.Services
         public async Task<ICollection<int>> GetTrackSessionsAsync(int trackId, CancellationToken cancellationToken)
         {
             return await _repository.Track.GetTrackSessionsAsync(trackId, cancellationToken);
+        }
+
+        public async Task UpdateTrackAsync(Track track)
+        {
+            _repository.Track.UpdateTrack(track);
+            await _repository.SaveAsync();
         }
     }
 }

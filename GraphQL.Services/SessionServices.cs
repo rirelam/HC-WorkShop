@@ -2,6 +2,7 @@
 using GrahpQL.Contracts;
 using GraphQL.Entities;
 using GraphQL.Services.Contracts;
+using Microsoft.EntityFrameworkCore;
 
 namespace GraphQL.Services
 {
@@ -18,6 +19,11 @@ namespace GraphQL.Services
         {
             _repository.Session.AddSession(session);
             await _repository.SaveAsync();
+        }
+
+        public async Task<Session?> FindAsync(int sessionId)
+        {
+            return await _repository.Session.FindAsync(sessionId).FirstOrDefaultAsync();
         }
 
         public async Task<IEnumerable<Session>> GetAllSessionsAsync(bool trackChanges = false)
@@ -38,6 +44,12 @@ namespace GraphQL.Services
         public async Task<ICollection<int>> GetSessionSpeakersAsync(int sessionId, CancellationToken cancellationToken)
         {
             return await _repository.Session.GetSessionSpeakersAsync(sessionId, cancellationToken);
+        }
+
+        public async Task UpdateSessionAsync(Session session)
+        {
+            _repository.Session.UpdateSession(session);
+            await _repository.SaveAsync();
         }
     }
 }

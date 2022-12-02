@@ -1,3 +1,4 @@
+using System.Diagnostics;
 using GrahpQL.Contracts;
 using GraphQL.Entities;
 using Microsoft.EntityFrameworkCore;
@@ -12,6 +13,12 @@ namespace GraphQL.Repository
 
         }
 
+        public void Add(Track track) => Create(track);
+
+        public async Task<Track?> FindAsync(int trackId, CancellationToken cancellationToken)
+        {
+            return await FindByCondition(t=>t.Id==trackId).FirstOrDefaultAsync(cancellationToken);
+        }
 
         public async Task<IEnumerable<Track>> GetTrackbyIdsAsync(IReadOnlyList<int> keys)
         {
@@ -27,5 +34,7 @@ namespace GraphQL.Repository
                     .Select(s => s.Id)
                     .ToArrayAsync(cancellationToken);
         }
+
+        public void UpdateTrack(Track track) => Update(track);
     }
 }

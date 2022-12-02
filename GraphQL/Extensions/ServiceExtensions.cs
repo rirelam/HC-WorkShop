@@ -4,6 +4,7 @@ using GrahpQL.Contracts;
 using GrahpQL.Presentation.DataLoader;
 using GrahpQL.Presentation.Sessions;
 using GrahpQL.Presentation.Speakers;
+using GrahpQL.Presentation.Tracks;
 using GrahpQL.Presentation.Types;
 using GraphQL.Repository;
 using GraphQL.Services;
@@ -42,6 +43,7 @@ namespace GraphQL.Extensions
               .AddMutationType(d => d.Name("Mutation"))
                 .AddTypeExtension<SpeakerMutations>()
                 .AddTypeExtension<SessionMutations>()
+                .AddTypeExtension<TrackMutations>()
               .AddType<SpeakerType>()
               .AddType<SessionType>()
               .AddType<AttendeeType>()

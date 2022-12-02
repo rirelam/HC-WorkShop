@@ -43,5 +43,32 @@ namespace GrahpQL.Presentation.Sessions
 
             return new AddSessionPayload(session);
         }
+
+        public async Task<ScheduleSessionPayload> ScheduleSessionAsync(
+                    ScheduleSessionInput input,
+                    IServiceManager service)
+        {
+            if (input.EndTime < input.StartTime)
+            {
+                return new ScheduleSessionPayload(
+                    new UserError("endTime has to be larger than startTime.", "END_TIME_INVALID"));
+            }
+
+            Session? session = await service.SessionServices.FindAsync(input.SessionId);
+
+            if (session is null)
+            {
+                return new ScheduleSessionPayload(
+                    new UserError("Session not found.", "SESSION_NOT_FOUND"));
+            }
+
+            session.TrackId = input.TrackId;
+            session.StartTime = input.StartTime;
+            session.EndTime = input.EndTime;
+
+            await service.SessionServices.UpdateSessionAsync(session);
+
+            return new ScheduleSessionPayload(session);
+        }
     }
 }
