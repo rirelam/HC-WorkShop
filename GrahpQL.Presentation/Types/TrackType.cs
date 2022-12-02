@@ -1,5 +1,6 @@
 
 using GrahpQL.Presentation.DataLoader;
+using GrahpQL.Presentation.Extensions;
 using GraphQL.Entities;
 using GraphQL.Services.Contracts;
 
@@ -25,9 +26,13 @@ namespace GrahpQL.Presentation.Types
                 .Field(t => t.Sessions)
                 .ResolveWith<TrackResolvers>(t => t.GetSessionsAsync(default!, default!, default!, default))
                 .Name("sessions");
+
+            descriptor
+                .Field(t => t.Name)
+                .UseUpperCase();
         }
 
-        private class TrackResolvers
+        private sealed class TrackResolvers
         {
             public async Task<IEnumerable<Session>> GetSessionsAsync(
                 [Parent] Track track,

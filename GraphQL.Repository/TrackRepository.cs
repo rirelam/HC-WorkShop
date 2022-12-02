@@ -37,9 +37,9 @@ namespace GraphQL.Repository
             return await RepositoryContext.Tracks.Where(t => names.Contains(t.Name)).ToListAsync(cancellationToken);
         }
 
-        public async Task<IEnumerable<Track>> GetTracksAsync(CancellationToken cancellationToken)
+        public IQueryable<Track> GetTracks()
         {
-            return await FindAll().ToListAsync(cancellationToken);
+            return RepositoryContext.Tracks.OrderBy(t => t.Name);
         }
 
         public async Task<ICollection<int>> GetTrackSessionsAsync(int trackId, CancellationToken cancellationToken)

@@ -9,10 +9,10 @@ namespace GrahpQL.Presentation.Tracks
     [ExtendObjectType("Query")]
     public class TrackQueries
     {
-        public async Task<IEnumerable<Track>> GetTracksAsync(
-        IServiceManager service,
-        CancellationToken cancellationToken) =>
-        await service.TrackServices.GetTracksAsync(cancellationToken);
+        [UsePaging]
+        public IQueryable<Track> GetTracks(
+        IServiceManager service) =>
+        service.TrackServices.GetTracks();
 
         public async Task<Track?> GetTrackByNameAsync(
             string name,

@@ -40,9 +40,9 @@ namespace GraphQL.Services
             return await _repository.Track.GetTrackByNamesAsync(names, cancellationToken);
         }
 
-        public async Task<IEnumerable<Track>> GetTracksAsync(CancellationToken cancellationToken)
+        public IQueryable<Track> GetTracks()
         {
-            return await _repository.Track.GetTracksAsync(cancellationToken);
+            return _repository.Track.GetTracks();
         }
 
         public async Task<ICollection<int>> GetTrackSessionsAsync(int trackId, CancellationToken cancellationToken)

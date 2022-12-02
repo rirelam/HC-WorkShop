@@ -9,7 +9,7 @@ namespace GraphQL.Services.Contracts
         Task AddAsync(Track track);
         Task UpdateTrackAsync(Track track);
         Task<Track?> FindAsync(int trackId, CancellationToken cancellationToken);
-        Task<IEnumerable<Track>> GetTracksAsync(CancellationToken cancellationToken);
+        IQueryable<Track> GetTracks();
         Task<Track?> GetTrackByNameAsync(string name, CancellationToken cancellationToken);
         Task<IEnumerable<Track>?> GetTrackByNamesAsync(string[] names, CancellationToken cancellationToken);
 
