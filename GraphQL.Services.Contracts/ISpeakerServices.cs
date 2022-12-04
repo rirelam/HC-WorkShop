@@ -6,7 +6,7 @@ namespace GraphQL.Services.Contracts
 {
     public interface ISpeakerServices
     {
-        Task<List<Speaker>> GetAllSpeakersAsync(bool trackChanges = false);
+        IQueryable<Speaker> GetAllSpeakers(bool trackChanges = false);
         Task<IEnumerable<Speaker>> GetSpeakerbyIdsAsync(IReadOnlyList<int> keys);
         Task AddSpeaker(AddSpeakerInputDto speakerInput);
         Task<IReadOnlyDictionary<int, Speaker>> GetSpeakersDictionaryAsync(IReadOnlyList<int> keys, CancellationToken cancellationToken);

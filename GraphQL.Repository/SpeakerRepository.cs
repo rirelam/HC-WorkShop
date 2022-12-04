@@ -24,9 +24,9 @@ namespace GraphQL.Repository
             Create(speaker);
         }
 
-        public async Task<List<Speaker>> GetAllSpeakersAsync(bool AsTraking = false)
+        public IQueryable<Speaker> GetAllSpeakers(bool AsTraking = false)
         {
-            return await FindAll(AsTraking).ToListAsync();
+            return FindAll(AsTraking).OrderBy(s => s.Name);
         }
 
         public async Task<ICollection<int>> GetSessionsIdsAsync(int speakerId, CancellationToken cancellationToken)

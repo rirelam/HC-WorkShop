@@ -1,5 +1,6 @@
 
 using GrahpQL.Presentation.DataLoader;
+using GrahpQL.Presentation.Types;
 using GraphQL.Entities;
 using GraphQL.Services.Contracts;
 
@@ -8,10 +9,12 @@ namespace GrahpQL.Presentation.Sessions
     [ExtendObjectType("Query")]
     public class SessionQueries
     {
-        public async Task<IEnumerable<Session>> GetSessionsAsync(
-         IServiceManager service,
-         CancellationToken cancellationToken) =>
-         await service.SessionServices.GetAllSessionsAsync(cancellationToken);
+        [UsePaging(typeof(NonNullType<SessionType>))]
+        [UseFiltering(typeof(SessionFilterInputType))]
+        [UseSorting]
+        public IQueryable<Session> GetSessions(
+         IServiceManager service) =>
+          service.SessionServices.GetAllSessions();
 
         public Task<Session> GetSessionByIdAsync(
             [ID(nameof(Session))] int id,

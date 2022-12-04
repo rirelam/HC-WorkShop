@@ -20,9 +20,9 @@ namespace GraphQL.Repository
             return  FindByCondition(s => s.Id == sessionId);
         }
 
-        public async Task<IEnumerable<Session>> GetAllSessionsAsync(CancellationToken cancellationToken, bool AsTraking = false)
+        public IQueryable<Session> GetAllSessions(bool AsTraking = false)
         {
-            return await FindAll(AsTraking).ToListAsync(cancellationToken);
+            return FindAll(AsTraking);
         }
 
         public async Task<ICollection<int>> GetSessionAttendeesAsync(int sessionId, CancellationToken cancellationToken)

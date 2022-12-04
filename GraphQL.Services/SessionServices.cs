@@ -26,9 +26,9 @@ namespace GraphQL.Services
             return await _repository.Session.FindAsync(sessionId).FirstOrDefaultAsync();
         }
 
-        public async Task<IEnumerable<Session>> GetAllSessionsAsync(CancellationToken cancellationToken, bool trackChanges = false)
+        public IQueryable<Session> GetAllSessions(bool trackChanges = false)
         {
-            return await _repository.Session.GetAllSessionsAsync(cancellationToken);
+            return _repository.Session.GetAllSessions();
         }
 
         public async Task<ICollection<int>> GetSessionAttendeesAsync(int sessionId, CancellationToken cancellationToken)

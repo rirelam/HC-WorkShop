@@ -5,7 +5,7 @@ namespace GrahpQL.Contracts
 {
     public interface ISpeakerRepository
     {
-        Task<List<Speaker>> GetAllSpeakersAsync(bool AsTraking = false);
+        IQueryable<Speaker> GetAllSpeakers(bool AsTraking = false);
         Task<IReadOnlyDictionary<int, Speaker>> GetSpeakersDictionaryAsync(IReadOnlyList<int> keys, CancellationToken cancellationToken);
         Task<ICollection<int>> GetSessionsIdsAsync(int speakerId, CancellationToken cancellationToken);
         Task<ICollection<int>> GetSpeakerSessionsAsync(int speakerId, CancellationToken cancellationToken);

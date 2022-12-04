@@ -50,6 +50,8 @@ namespace GraphQL.Extensions
               .AddType<SessionType>()
               .AddType<AttendeeType>()
               .AddType<TrackType>()
+              .AddFiltering()
+              .AddSorting()
               .AddDataLoader<SpeakerByIdDataLoader>()
               .AddDataLoader<SessionByIdDataLoader>();
     }

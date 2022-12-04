@@ -21,9 +21,9 @@ namespace GraphQL.Services
             await _repository.SaveAsync();
         }
 
-        public async Task<List<Speaker>> GetAllSpeakersAsync(bool trackChanges = false)
+        public IQueryable<Speaker> GetAllSpeakers(bool trackChanges = false)
         {
-            return await _repository.Speaker.GetAllSpeakersAsync();
+            return  _repository.Speaker.GetAllSpeakers();
         }
 
         public async Task<ICollection<int>> GetSessionsIdsAsync(Speaker speaker, CancellationToken cancellationToken)

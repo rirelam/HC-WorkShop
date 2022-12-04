@@ -7,9 +7,10 @@ namespace GrahpQL.Presentation.Speakers
     [ExtendObjectType("Query")]
     public class SpeakerQueries
     {
-        public async Task<List<Speaker>> GetSpeakersAsync(IServiceManager service)
+        [UsePaging]
+        public IQueryable<Speaker> GetSpeaker(IServiceManager service)
         {
-            return await service.SpeakerServices.GetAllSpeakersAsync();
+            return service.SpeakerServices.GetAllSpeakers();
         }
 
         public async Task<Speaker> GetSpeakerByIdAsync(
