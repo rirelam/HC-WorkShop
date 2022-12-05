@@ -13,11 +13,23 @@ namespace GraphQL.Repository
 
         }
 
-        public async  Task<IEnumerable<Attendee>> GetAttendeebyIdsAsync(IReadOnlyList<int> keys)
+        public void Add(Attendee attendee) => Create(attendee);
+
+        public async Task<Attendee?> GetAttendeeByIdAsync(int attendeeId, CancellationToken cancellationToken)
+        {
+            return await FindByCondition(a => a.Id == attendeeId).FirstOrDefaultAsync(cancellationToken);
+        }
+
+        public async Task<IEnumerable<Attendee>> GetAttendeebyIdsAsync(IReadOnlyList<int> keys)
         {
             return await FindAll()
                             .Where(s => keys.Contains(s.Id))
                             .ToListAsync();
+        }
+
+        public IQueryable<Attendee> GetAttendees()
+        {
+            return FindAll();
         }
 
         public async Task<ICollection<int>> GetAttendeeSessionsAsync(int attendeeId, CancellationToken cancellationToken)
@@ -28,5 +40,7 @@ namespace GraphQL.Repository
                     .SelectMany(s => s.SessionsAttendees.Select(t => t.SessionId))
                     .ToArrayAsync(cancellationToken);
         }
+
+        public void UpdateAttendee(Attendee attendee) => Update(attendee);
     }
 }

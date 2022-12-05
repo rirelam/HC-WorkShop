@@ -2,6 +2,7 @@
 using GrahpQL.Presentation.Shared;
 using GraphQL.Entities;
 using GraphQL.Services.Contracts;
+using HotChocolate.Subscriptions;
 
 namespace GrahpQL.Presentation.Sessions
 {
@@ -46,7 +47,8 @@ namespace GrahpQL.Presentation.Sessions
 
         public async Task<ScheduleSessionPayload> ScheduleSessionAsync(
                     ScheduleSessionInput input,
-                    IServiceManager service)
+                    IServiceManager service,
+                    [Service] ITopicEventSender eventSender)
         {
             if (input.EndTime < input.StartTime)
             {
@@ -67,6 +69,10 @@ namespace GrahpQL.Presentation.Sessions
             session.EndTime = input.EndTime;
 
             await service.SessionServices.UpdateSessionAsync(session);
+
+            await eventSender.SendAsync(
+                        nameof(SessionSubscriptions.OnSessionScheduledAsync),
+                        session.Id);
 
             return new ScheduleSessionPayload(session);
         }

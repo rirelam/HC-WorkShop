@@ -1,6 +1,7 @@
 using Commons.Contract;
 using Commons.Services;
 using GrahpQL.Contracts;
+using GrahpQL.Presentation.Attendees;
 using GrahpQL.Presentation.DataLoader;
 using GrahpQL.Presentation.Sessions;
 using GrahpQL.Presentation.Speakers;
@@ -43,15 +44,19 @@ namespace GraphQL.Extensions
                 .AddTypeExtension<TrackQueries>()
               .AddGlobalObjectIdentification()
               .AddMutationType(d => d.Name("Mutation"))
+                .AddTypeExtension<AttendeeMutations>()
                 .AddTypeExtension<SpeakerMutations>()
                 .AddTypeExtension<SessionMutations>()
                 .AddTypeExtension<TrackMutations>()
+              .AddSubscriptionType(d => d.Name("Subscription"))
+                  .AddTypeExtension<SessionSubscriptions>()
               .AddType<SpeakerType>()
               .AddType<SessionType>()
               .AddType<AttendeeType>()
               .AddType<TrackType>()
               .AddFiltering()
               .AddSorting()
+              .AddInMemorySubscriptions()
               .AddDataLoader<SpeakerByIdDataLoader>()
               .AddDataLoader<SessionByIdDataLoader>();
     }
